@@ -14,6 +14,7 @@ class GameScene: SKScene {
     // Example 1  - Adding text to the screen
     let label = SKLabelNode(text:"HELLO WORLD!")
     let label2 = SKLabelNode(text:"ABCD")
+    let label3 = SKLabelNode(text:"kanwar")
     
     // Example 2 - Draw a square on the screen
     let square = SKSpriteNode(color: SKColor.blue, size: CGSize(width: 50, height: 50))
@@ -48,6 +49,7 @@ class GameScene: SKScene {
         // add it to your scene (draw it!)
         addChild(label)
         addChild(label2)
+        addChild(label3)
         
         // configure the square
         square.position = CGPoint(x: 105, y:700);
