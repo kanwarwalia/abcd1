@@ -15,6 +15,7 @@ class GameScene: SKScene {
     let label = SKLabelNode(text:"HELLO WORLD!")
     let label2 = SKLabelNode(text:"ABCD")
     let label3 = SKLabelNode(text:"kanwar")
+    let label4 = SKLabelNode(text:"kanwar1")
     
     // Example 2 - Draw a square on the screen
     let square = SKSpriteNode(color: SKColor.blue, size: CGSize(width: 50, height: 50))
