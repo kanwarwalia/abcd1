@@ -24,7 +24,36 @@ class GameScene: SKScene {
     let duck = SKSpriteNode(imageNamed: "psyduck")
     
     // Example 4 - Draw a circle on the screen
-    let circle = SKShapeNode(circleOfRadius: 40)
+    let circle = SKShapeNode(circleOfRadius: 10)
+    
+    
+    
+    override func update(_ currentTime: TimeInterval) {
+       // print("time: \(currentTime)")
+        
+    }
+    
+    
+    //finger up
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self) // self is the current SKScene
+            let node = atPoint(location)
+            
+            // To get the touched half of the screen I do this
+            if (location.x < self.size.width/2) {
+                // left half touched, do something
+                print("touched left")
+            }
+            
+            if location.x >= self.size.width/2 {
+                // right half touched, do something
+                print("touched right")
+            }
+        }
+
+    }
+    
     
     override func didMove(to view: SKView) {
         // output the size of the screen
@@ -53,22 +82,64 @@ class GameScene: SKScene {
         addChild(label3)
         
         // configure the square
-        square.position = CGPoint(x: 105, y:700);
+        square.position = CGPoint(x: 50, y:50);
         // add square to scene
         addChild(square)
         
         // configure your circle
         // -----------------------
         // color of border
-        circle.strokeColor = SKColor.yellow
+        circle.strokeColor = SKColor.green
         // width of border
-        circle.lineWidth = 5
+        circle.lineWidth = 10
         // fill color
-        circle.fillColor = SKColor.magenta
+        circle.fillColor = SKColor.gray
         // location of circle
-        circle.position = CGPoint(x:200, y:100)
+        circle.position = CGPoint(x:200, y:600)
         addChild(circle)
         
+        
+        
+        // movement ----- ACTion
+        // 1. Single movements
+        //2. Sequence of movements (combine Actions)
+        
+        //1. define movement up down circle
+        //2. Apply movement to character
+        
+        //1. Single movement
+        // move SPECIFIC DISTANCE
+        let moveAction = SKAction.moveBy(x: 100, y: 0, duration: 5)
+        let moveAction4 = SKAction.moveBy(x: 0, y: 100, duration: 5)
+        let moveAction5 = SKAction.moveBy(x: 0, y: -50, duration: 5)
+        let moveAction6 = SKAction.moveBy(x: 50, y: 50, duration: 5)
+        let sequence:SKAction = SKAction.sequence([moveAction, moveAction4])
+        let sequence2:SKAction = SKAction.sequence([moveAction, moveAction4])
+        circle.run(sequence.reversed())
+        duck.run(moveAction6.reversed())
+        square.run(SKAction.repeat(sequence2, count: 3))
+        
+       // let Squarepostion = CGPoint(x: self.size.width/2, y:self.size.height/2)
+       // let moveTOCircleAction = SKAction.moveTo(x: Squarepostion, duration: 5)
+        // move to spcific coordinate
+        //let moveAction2 = SKAction.moveTo(x: 300, duration: 4)
+        
+        //let newPosition = CGPoint(x: 100, y:700)
+       // let moveAction3 = SKAction.move(to: newPosition, duration: 5)
+        //circle.run(moveAction)
+        //circle.run(moveAction4)
+        
+        
+        //print("width of screen : \(self.size.width) px")
+        //print("height of screen : \(self.size.height) px")
+        // check if cirle touches the square
+        if(circle.frame.intersects(square.frame))
+        {
+            print("collision detected")
+        }
+        
     }
+    
+
     
 }
